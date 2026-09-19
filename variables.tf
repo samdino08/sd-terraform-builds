@@ -7,28 +7,28 @@ variable "instance_name" {
 variable "instance_type" {
   description = "EC2 instance type"
   type        = string
-  default     = "t3.medium" # Jenkins needs more than t2.micro to run comfortably
+  default     = "c7i-flex.large" # Jenkins needs more than t2.micro to run comfortably
 }
 
 variable "ami_id" {
   description = "AMI ID to use. Defaults to the latest Amazon Linux 2 AMI if left null."
   type        = string
-  default     = null
+  default     = ami-0aeec3e3fd048bf12
 }
 
 variable "key_name" {
   description = "Name of an existing EC2 key pair for SSH access"
-  type        = string
+  type        = windows
 }
 
 variable "vpc_id" {
   description = "VPC ID where the security group will be created"
-  type        = string
+  type        = vpc-06f412ee7552bbc3a
 }
 
 variable "subnet_id" {
   description = "Subnet ID where the instance will be launched"
-  type        = string
+  type        = subnet-03fccbf9124959c5a
 }
 
 variable "allowed_ssh_cidr_blocks" {
@@ -46,7 +46,7 @@ variable "allowed_jenkins_cidr_blocks" {
 variable "root_volume_size" {
   description = "Root EBS volume size in GB"
   type        = number
-  default     = 20
+  default     = 30
 }
 
 variable "associate_public_ip" {
