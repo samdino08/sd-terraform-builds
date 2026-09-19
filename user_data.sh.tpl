@@ -4,9 +4,18 @@ set -euxo pipefail
 # --- System update ---
 yum update -y
 
-# --- Java (Jenkins requires Java 17 on modern versions) ---
-amazon-linux-extras enable corretto17 || true
-yum install -y java-17-amazon-corretto-devel git wget
+# --- Java (Jenkins now requires Java 21) ---
+# Pull Corretto 21 from Amazon's own repo rather than amazon-linux-extras,
+# since extras topic availability varies across AL2 AMI releases.
+rpm --import https://yum.corretto.aws/corretto.key
+curl -Lo /etc/yum.repos.d/corretto.repo https://yum.corretto.aws/corretto.repo
+yum install -y java-21-amazon-corretto-devel git wget
+
+# Make sure java 21 is what's on PATH (in case an older JDK is also present)
+alternatives --install /usr/bin/java java /usr/lib/jvm/java-21-amazon-corretto/bin/java 2100 || true
+alternatives --set java /usr/lib/jvm/java-21-amazon-corretto/bin/java || true
+
+java -version
 
 # --- Jenkins repo + install ---
 wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
