@@ -1,7 +1,7 @@
 variable "instance_name" {
   description = "Name tag for the EC2 instance"
   type        = string
-  default     = "jenkins-server"
+  default     = "sd-tf-jenkins-server"
 }
 
 variable "instance_type" {
