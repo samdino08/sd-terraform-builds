@@ -1,0 +1,5 @@
+region     = "us-east-1"
+key_name   = "your-key-pair-name"
+vpc_id     = "vpc-xxxxxxxx"
+subnet_id  = "subnet-xxxxxxxx"
+my_ip_cidr = "203.0.113.5/32"
