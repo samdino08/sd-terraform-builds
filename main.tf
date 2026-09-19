@@ -67,7 +67,7 @@ resource "aws_instance" "jenkins" {
     volume_type = "gp3"
   }
 
-  user_data = templatefile("${path.module}/user_data.sh1.tpl", {})
+  user_data = templatefile("${path.module}/user_data.sh1.tp2", {})
 
   tags = merge(
     var.tags,
